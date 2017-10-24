@@ -1,0 +1,4 @@
+date
+====
+format=[Y-m-d] See PHP date
+

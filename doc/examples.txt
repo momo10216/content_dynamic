@@ -1,0 +1,6 @@
+Examples:
+
+Date
+====
+{date format=[Y-m-d]}T{date format=[H:i:s]}
+
