@@ -10,9 +10,8 @@
 	<version>1.0</version>
 	<description>PLG_NOK_DYNAMIC_APP_DESC</description>
 	<files>
-		<filename plugin="plg_nok_json">plg_nok_dynamic.php</filename>
+		<filename plugin="plg_nok_dynamic">plg_nok_dynamic.php</filename>
 		<filename>index.html</filename>
-		<folder>js</folder>
 	</files>
 	<languages folder="language">
 		<language tag="de-DE">de-DE.plg_content_plg_nok_dynamic.ini</language>
@@ -22,6 +21,6 @@
 	</languages>
 	<config />
 	<updateservers>
-		<server type="extension" priority="2" name="JSON plugin Updates">http://kuem.in/joomlaupdate/plg_nok_dynamic.xml</server>
+		<server type="extension" priority="2" name="Dynamic Plugin Updates">http://kuem.in/joomlaupdate/plg_nok_dynamic.xml</server>
 	</updateservers>
 </extension>

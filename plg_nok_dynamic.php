@@ -15,7 +15,7 @@ class plgContentplg_nok_dynamic extends JPlugin {
 	  	$globalParams = $this->params;
 		$found = false;
 		$document = JFactory::getDocument();
-		foreach ($fields as $field) {
+		foreach ($this->_fields as $field) {
 			$hits = preg_match_all('#{'.$field.'[\s]+([^}]*)}#s', $article->text, $matches);
 			if (!empty($hits)) {
 				for ($i=0; $i<$hits; $i++) {
@@ -52,11 +52,11 @@ class plgContentplg_nok_dynamic extends JPlugin {
 		return $entryParamsList;
 	}
 
-	private function _date_create_html($id, $params) {
+	private function _date_create_html($params) {
 		$format = $this->_hashget($params,'format');
 		switch ($format) {
 			case '':
-				return date($format);
+				return date('Y-m-d H:i:s');
 				break;
 			case 'date':
 				break;
