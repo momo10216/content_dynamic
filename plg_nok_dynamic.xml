@@ -21,6 +21,6 @@
 	</languages>
 	<config />
 	<updateservers>
-		<server type="extension" priority="2" name="Dynamic Plugin Updates">http://kuem.in/joomlaupdate/plg_nok_dynamic.xml</server>
+		<server type="extension" priority="2" name="Dynamic Plugin Updates">http://kuem.in/joomlaupdate/plg_content_nok_dynamic.xml</server>
 	</updateservers>
 </extension>
