@@ -2,3 +2,13 @@ date
 ====
 format=[Y-m-d] See PHP date
 
+daycount
+========
+startdate=[ISO date]
+enddate=[ISO date]
+text_before_multiple=[Text with %d for the remaining days]
+text_before_single=[Text for the last day]
+text_reached=[Text after date was reached]
+text_after_single=[Text after one day]
+text_after_multiple=[Text with %d for the days]
+

@@ -9,7 +9,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport('joomla.plugin.plugin');
 
 class plgContentplg_nok_dynamic extends JPlugin {
-	private $_fields = array('date');
+	private $_fields = array('date','daycount');
 	public function onContentPrepare($context, &$article, &$params, $limitstart) {
 		$app = JFactory::getApplication();
 	  	$globalParams = $this->params;
@@ -24,6 +24,10 @@ class plgContentplg_nok_dynamic extends JPlugin {
 					switch ($field) {
 						case 'date':
 							$html = $this->_date_create_html($plgParams);
+							$article->text = str_replace($matches[0][$i], $html, $article->text);
+							break;
+						case 'daycount':
+							$html = $this->_daycount_create_html($plgParams);
 							$article->text = str_replace($matches[0][$i], $html, $article->text);
 							break;
 						default:
@@ -64,9 +68,41 @@ class plgContentplg_nok_dynamic extends JPlugin {
 				return date($format);
 				break;
 		}
-		return $html;
+		return '';
 	}
 
+	private function _daycount_create_html($params) {
+		$startdate = $this->_hashget($params,'startdate');
+		$enddate = $this->_hashget($params,'enddate');
+		$today = date('Y-m-d');
+		$textBeforeMulti = $this->_hashget($params,'text_before_multiple');
+		$textBeforeSingle = $this->_hashget($params,'text_before_single');
+		$textReached = $this->_hashget($params,'text_reached');
+		$textAfterSingle = $this->_hashget($params,'text_after_single');
+		$textAfterMulti = $this->_hashget($params,'text_after_multiple');
+		if ($today < $startdate) {
+			$datetime1 = new DateTime($startdate);
+			$datetime2 = new DateTime($today);
+			$days = $datetime1->diff($datetime2)->d;
+			if ($days > 1) {
+				return sprintf($textBeforeMulti, $days);
+			} else {
+				return $textBeforeSingle;
+			}
+		} else if (($today >= $startdate) && ($today <= $enddate)) {
+			return $textReached;
+		} else {
+			$datetime1 = new DateTime($enddate);
+			$datetime2 = new DateTime($today);
+			$days = $datetime2->diff($datetime1)->d;
+			if ($days > 1) {
+				return sprintf($textAfterMulti, $days);
+			} else {
+				return $textAfterSingle;
+			}
+		}
+		return '';
+	}
 
 	private function _hashget($hashmap, $key) {
 		if (isset($hashmap[$key])) {
