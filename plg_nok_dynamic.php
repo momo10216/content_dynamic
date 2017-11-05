@@ -83,7 +83,7 @@ class plgContentplg_nok_dynamic extends JPlugin {
 		if ($today < $startdate) {
 			$datetime1 = new DateTime($startdate);
 			$datetime2 = new DateTime($today);
-			$days = $datetime1->diff($datetime2)->d;
+			$days = $datetime1->diff($datetime2)->format('%a');
 			if ($days > 1) {
 				return sprintf($textBeforeMulti, $days);
 			} else {
@@ -94,7 +94,7 @@ class plgContentplg_nok_dynamic extends JPlugin {
 		} else {
 			$datetime1 = new DateTime($enddate);
 			$datetime2 = new DateTime($today);
-			$days = $datetime2->diff($datetime1)->d;
+			$days = $datetime2->diff($datetime1)->format('%a');
 			if ($days > 1) {
 				return sprintf($textAfterMulti, $days);
 			} else {
