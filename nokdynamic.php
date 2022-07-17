@@ -10,31 +10,27 @@
 */
 
 // Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
-jimport('joomla.plugin.plugin');
+use Joomla\CMS\Plugin\CMSPlugin;
 
-class plgContentplg_nok_dynamic extends JPlugin {
+class PlgContentNokdynamic extends CMSPlugin {
 	private $_fields = array('date','daycount');
-	public function onContentPrepare($context, &$article, &$params, $limitstart) {
-		$app = JFactory::getApplication();
-	  	$globalParams = $this->params;
-		$found = false;
-		$document = JFactory::getDocument();
+	public function onContentPrepare($context, &$row, $params, $page = 0) {
 		foreach ($this->_fields as $field) {
-			$hits = preg_match_all('#{'.$field.'[\s]+([^}]*)}#s', $article->text, $matches);
+			$hits = preg_match_all('#{'.$field.'[\s]+([^}]*)}#s', $row->text, $matches);
 			if (!empty($hits)) {
 				for ($i=0; $i<$hits; $i++) {
 					$entryParamsText = $matches[1][$i];
-					$plgParams = $this->_get_params($globalParams, $entryParamsText);
+					$plgParams = $this->_get_params($entryParamsText);
 					switch ($field) {
 						case 'date':
 							$html = $this->_date_create_html($plgParams);
-							$article->text = str_replace($matches[0][$i], $html, $article->text);
+							$row->text = str_replace($matches[0][$i], $html, $row->text);
 							break;
 						case 'daycount':
 							$html = $this->_daycount_create_html($plgParams);
-							$article->text = str_replace($matches[0][$i], $html, $article->text);
+							$row->text = str_replace($matches[0][$i], $html, $row->text);
 							break;
 						default:
 							break;
@@ -42,11 +38,11 @@ class plgContentplg_nok_dynamic extends JPlugin {
 				}
 			}
 		}
-		return $found;
 	}
 
-	private function _get_params($globalParams, $entryParamsText) {
+	private function _get_params($entryParamsText) {
 		// Initialize with the global paramteres
+		//$globalParams = $this->params;
 		//$entryParamsList['width'] = $globalParams->get('width');
 
 		// Overwrite with the local paramteres
