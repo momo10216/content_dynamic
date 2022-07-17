@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="content" version="4.0" method="upgrade">
+	<name>PLG_NOK_DYNAMIC</name>
+	<author>Norbert Kuemin</author>
+	<creationDate>October 2017</creationDate>
+	<copyright>(C) 2022 Norbert Kuemin. All rights reserved.</copyright>
+	<license>GNU/GPL http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>momo_102@bluemail.ch</authorEmail>
+	<authorUrl>http://kuem.in/</authorUrl>
+	<version>2.0</version>
+	<description>PLG_NOK_DYNAMIC_APP_DESC</description>
+	<files>
+		<filename plugin="nokdynamic">nokdynamic.php</filename>
+	</files>
+	<languages folder="language">
+		<language tag="de-DE">de-DE.plg_content_nokdynamic.ini</language>
+		<language tag="de-DE">de-DE.plg_content_nokdynamic.sys.ini</language>
+		<language tag="en-GB">en-GB.plg_content_nokdynamic.ini</language>
+		<language tag="en-GB">en-GB.plg_content_nokdynamic.sys.ini</language>
+	</languages>
+	<config />
+	<updateservers>
+		<server type="extension" priority="2" name="PLG_NOK_DYNAMIC_APP_UPDATE">http://kuem.in/joomlaupdate/plg_content_nokdynamic.xml</server>
+	</updateservers>
+</extension>
